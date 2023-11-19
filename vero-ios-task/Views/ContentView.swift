@@ -28,6 +28,18 @@ struct ContentView: View {
                             List(tasks) { task in
                                 Text(task.title ?? "No title")
                             }
+                            .allowsHitTesting(!contentViewViewModel.loading)
+                            .refreshable {
+                                //contentViewViewModel.fetch()
+                                withAnimation {
+                                    contentViewViewModel.loading = true
+                                }
+                                DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+                                    withAnimation {
+                                        contentViewViewModel.loading = false
+                                    }
+                                }
+                            }
                         }
                     }
                 }
@@ -48,15 +60,20 @@ struct ContentView: View {
                     }
                 }
             }
-            .blur(radius: contentViewViewModel.loading ? 5 : 0)
             
-            if contentViewViewModel.loading {
+            ZStack {
+                Color.clear
+                    .background(.black)
+                    .opacity(0.5)
+                
                 ProgressView()
                     .frame(width: 100, height: 100)
-                    .background(.ultraThinMaterial)
+                    .background(.regularMaterial)
                     .cornerRadius(10)
                     .ignoresSafeArea(.all)
             }
+            .opacity(contentViewViewModel.loading ? 1 : 0)
+            .animation(.easeInOut, value: contentViewViewModel.loading)
         }
         .ignoresSafeArea()
     }

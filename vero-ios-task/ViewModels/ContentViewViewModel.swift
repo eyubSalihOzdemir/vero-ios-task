@@ -127,14 +127,15 @@ enum DataError: Error {
                         case .success(let tasks):
                             print("Successfully fetched the tasks.")
                             self.saveToCoreData(tasks: tasks)
-                            self.loading = false
                         case .failure(let failure):
                             print(failure)
                         }
+                        self.loading = false
                     }
                 }
             case .failure(let failure):
                 print(failure)
+                self.loading = false
             }
         }
     }
