@@ -15,48 +15,63 @@ struct ContentView: View {
     
     @FetchRequest(sortDescriptors: []) var tasks: FetchedResults<Task>
     
-    init() { }
+    init() {
+        
+    }
     
     var body: some View {
         ZStack {
             NavigationView {
                 VStack {
-                    Group {
-                        if tasks.count == 0 {
-                            Text("No tasks here—quiet as a library.")
-                        } else {
-                            List(tasks) { task in
-                                Text(task.title ?? "No title")
+                    if tasks.count == 0 {
+                        Text("No tasks here—quiet as a library.")
+                    } else {
+                        List {
+                            ForEach(tasks) { task in
+                                HStack {
+                                    Text(task.taskDescription ?? "No title")
+                                    
+                                    Spacer()
+                                    
+                                    Circle()
+                                        .fill(Color.red)
+                                        .frame(width: 20, height: 20)
+                                }
                             }
-                            .allowsHitTesting(!contentViewViewModel.loading)
-                            .refreshable {
-                                //contentViewViewModel.fetch()
+                            .onDelete(perform: removeTask)
+                        }
+                        .allowsHitTesting(!contentViewViewModel.loading)
+                        .refreshable {
+                            removeAllTasks()
+                            contentViewViewModel.fetch()
+                            /*withAnimation {
+                                contentViewViewModel.loading = true
+                            }
+                            DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
                                 withAnimation {
-                                    contentViewViewModel.loading = true
+                                    contentViewViewModel.loading = false
                                 }
-                                DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-                                    withAnimation {
-                                        contentViewViewModel.loading = false
-                                    }
-                                }
-                            }
+                            }*/
                         }
                     }
                 }
                 .navigationTitle("Tasks")
                 .toolbar {
-                    Button {
-                        //contentViewViewModel.fetch()
-                        withAnimation {
-                            contentViewViewModel.loading = true
+                    ToolbarItem(placement: .topBarLeading) {
+                        Button {
+                            removeAllTasks()
+                            contentViewViewModel.fetch()
+                        } label: {
+                            Text(tasks.count > 0 ? "Refresh" : "Get tasks")
                         }
-                        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-                            withAnimation {
-                                contentViewViewModel.loading = false
-                            }
+                    }
+                    
+                    ToolbarItem(placement: .topBarTrailing) {
+                        Button {
+                            removeAllTasks()
+                        } label: {
+                            Text("Clear")
                         }
-                    } label: {
-                        Text(tasks.count > 1 ? "Refresh" : "Get tasks")
                     }
                 }
             }
@@ -76,6 +91,25 @@ struct ContentView: View {
             .animation(.easeInOut, value: contentViewViewModel.loading)
         }
         .ignoresSafeArea()
+    }
+    
+    func removeTask(at offsets: IndexSet) {
+        for index in offsets {
+            let task = tasks[index]
+            moc.delete(task)
+        }
+        PersistenceController.shared.save()
+    }
+    
+    func removeAllTasks() {
+        contentViewViewModel.loading = true
+        
+        for task in tasks {
+            moc.delete(task)
+        }
+        PersistenceController.shared.save()
+        
+        contentViewViewModel.loading = false
     }
 }
 

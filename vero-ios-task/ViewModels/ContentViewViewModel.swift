@@ -103,7 +103,7 @@ enum DataError: Error {
                 completion(.failure(DataError.invalidResponse))
                 return
             }
-            
+                  
             // good to go. convert the result to json using our model
             if let tasks = try? JSONDecoder().decode([TaskModel].self, from: data) {
                 completion(.success(tasks))

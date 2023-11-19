@@ -20,4 +20,19 @@ struct TaskModel: Codable {
     let colorCode: String?
     let workingTime: String?
     let isAvailableInTimeTrackingKioskMode: Bool?
+    
+    enum CodingKeys: String, CodingKey {
+        case businessUnit = "businessUnit"
+        case businessUnitKey = "businessUnitKey"
+        case colorCode = "colorCode"
+        case isAvailableInTimeTrackingKioskMode = "isAvailableInTimeTrackingKioskMode"
+        case parentTaskID = "parentTaskID"
+        case preplanningBoardQuickSelect = "preplanningBoardQuickSelect"
+        case sort = "sort"
+        case task = "task"
+        case taskDescription = "description"
+        case title = "title"
+        case wageType = "wageType"
+        case workingTime = "workingTime"
+    }
 }
