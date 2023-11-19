@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import CoreData
 
 // error types to make debuggin easier for us
 enum DataError: Error {
@@ -125,7 +126,7 @@ enum DataError: Error {
                         switch resourceResult {
                         case .success(let tasks):
                             print("Successfully fetched the tasks.")
-                            self.tasks = tasks
+                            self.saveToCoreData(tasks: tasks)
                             self.loading = false
                         case .failure(let failure):
                             print(failure)
@@ -135,6 +136,27 @@ enum DataError: Error {
             case .failure(let failure):
                 print(failure)
             }
+        }
+    }
+    
+    func saveToCoreData(tasks: [TaskModel]) {
+        for task in tasks {
+            let coreDataTask = Task(context: PersistenceController.shared.container.viewContext)
+        
+            coreDataTask.task = task.task
+            coreDataTask.title = task.title
+            coreDataTask.taskDescription = task.taskDescription
+            coreDataTask.sort = task.sort
+            coreDataTask.wageType = task.wageType
+            coreDataTask.businessUnitKey = task.businessUnitKey
+            coreDataTask.businessUnit = task.businessUnit
+            coreDataTask.parentTaskID = task.parentTaskID
+            coreDataTask.preplanningBoardQuickSelect = task.preplanningBoardQuickSelect
+            coreDataTask.colorCode = task.colorCode
+            coreDataTask.workingTime = task.workingTime
+            coreDataTask.isAvailableInTimeTrackingKioskMode = task.isAvailableInTimeTrackingKioskMode ?? false
+            
+            PersistenceController.shared.save()
         }
     }
 }

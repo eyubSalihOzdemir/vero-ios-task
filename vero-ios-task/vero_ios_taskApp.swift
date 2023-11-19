@@ -9,12 +9,18 @@ import SwiftUI
 
 @main
 struct vero_ios_taskApp: App {
-    @StateObject private var dataController = DataController()
+    @Environment(\.scenePhase) var scenePhase
+    
+    let persistenceController = PersistenceController.shared
     
     var body: some Scene {
         WindowGroup {
             ContentView()
-                .environment(\.managedObjectContext, dataController.container.viewContext)
+                .environment(\.managedObjectContext, persistenceController.container.viewContext)
+        }
+        // save the changes in the memory to CoreData when the app moves to the background
+        .onChange(of: scenePhase) {
+            persistenceController.save()
         }
     }
 }
