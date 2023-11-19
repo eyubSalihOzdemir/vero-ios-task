@@ -7,6 +7,7 @@
 
 import Foundation
 
+// error types to make debuggin easier for us
 enum DataError: Error {
     case invalidDataAuth
     case invalidResponseAuth
@@ -18,9 +19,15 @@ enum DataError: Error {
 }
 
 @MainActor class ContentViewViewModel: ObservableObject {
+    @Published var tasks: [TaskModel] = []
+    @Published var loading = false
        
-    init() { }
+    init() {
+        // fetch the data as soon as we initialize this class
+        //self.fetch()
+    }
     
+    // function to get the login token
     private func getAuth(completion: @escaping (Result<String, Error>) -> Void) {
         let headers = [
             "Authorization": "Basic QVBJX0V4cGxvcmVyOjEyMzQ1NmlzQUxhbWVQYXNz",
@@ -71,9 +78,8 @@ enum DataError: Error {
         task.resume()
     }
     
-    private func getResources(token: String, completion: @escaping (Result<Bool, Error>) -> Void) {
-        print("Here's the token: \(token)")
-        
+    // function to fetch the actual data
+    private func getResources(token: String, completion: @escaping (Result<[TaskModel], Error>) -> Void) {
         // we can force unwrap the URL since we know it's a valid, constant link
         let url = URL(string: "https://api.baubuddy.de/dev/index.php/v1/tasks/select")!
         
@@ -97,35 +103,33 @@ enum DataError: Error {
                 return
             }
             
-            // good to go. convert the result to json
-            do {
-                if let jsonData = data.data(using: .utf8){
-                    print(jsonData)
-                }
-                    
-                if let json = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any] {
-                    print(json)
-                } else {
-                    completion(.failure(DataError.typeConversion))
-                }
-            } catch let error as NSError {
-                // there was an error convertin the json
-                completion(.failure(DataError.message(error)))
+            // good to go. convert the result to json using our model
+            if let tasks = try? JSONDecoder().decode([TaskModel].self, from: data) {
+                completion(.success(tasks))
+            } else {
+                completion(.failure(DataError.typeConversion))
             }
         }
         task.resume()
     }
     
     func fetch() {
+        self.loading = true
+        
         self.getAuth { result in
             switch result {
             case .success(let token):
                 self.getResources(token: token) { resourceResult in
-                    switch resourceResult {
-                    case .success(let data):
-                        print(data)
-                    case .failure(let failure):
-                        print(failure)
+                    // make the the publishing happens on the main thread
+                    DispatchQueue.main.async {
+                        switch resourceResult {
+                        case .success(let tasks):
+                            print("Successfully fetched the tasks.")
+                            self.tasks = tasks
+                            self.loading = false
+                        case .failure(let failure):
+                            print(failure)
+                        }
                     }
                 }
             case .failure(let failure):

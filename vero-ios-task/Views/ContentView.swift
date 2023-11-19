@@ -8,10 +8,17 @@
 import SwiftUI
 
 struct ContentView: View {
+    @FetchRequest(sortDescriptors: []) var tasks: FetchedResults<Task>
+    @Environment(\.managedObjectContext) var moc
+    
     @StateObject var contentViewViewModel = ContentViewViewModel()
     
     var body: some View {
         VStack {
+            List(tasks) { task in
+                Text(task.title ?? "No title")
+            }
+            
             Button {
                 contentViewViewModel.fetch()
             } label: {
