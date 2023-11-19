@@ -66,11 +66,13 @@ struct ContentView: View {
                         }
                     }
                     
-                    ToolbarItem(placement: .topBarTrailing) {
-                        Button {
-                            removeAllTasks()
-                        } label: {
-                            Text("Clear")
+                    if tasks.count > 0 {
+                        ToolbarItem(placement: .topBarTrailing) {
+                            Button {
+                                removeAllTasks()
+                            } label: {
+                                Text("Clear")
+                            }
                         }
                     }
                 }
