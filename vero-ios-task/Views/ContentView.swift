@@ -15,6 +15,8 @@ struct ContentView: View {
     
     @FetchRequest(sortDescriptors: []) var tasks: FetchedResults<Task>
     
+    @State var showingAlert = false
+    
     init() {
         
     }
@@ -29,7 +31,7 @@ struct ContentView: View {
                         List {
                             ForEach(tasks) { task in
                                 HStack {
-                                    Text(task.taskDescription ?? "No title")
+                                    Text(task.taskDescription ?? "No description")
                                     
                                     Spacer()
                                     
@@ -40,7 +42,7 @@ struct ContentView: View {
                             }
                             .onDelete(perform: removeTask)
                         }
-                        .allowsHitTesting(!contentViewViewModel.loading)
+                        //.allowsHitTesting(!contentViewViewModel.loading)
                         .refreshable {
                             removeAllTasks()
                             contentViewViewModel.fetch()
@@ -69,9 +71,20 @@ struct ContentView: View {
                     if tasks.count > 0 {
                         ToolbarItem(placement: .topBarTrailing) {
                             Button {
-                                removeAllTasks()
+                                showingAlert.toggle()
                             } label: {
                                 Text("Clear")
+                            }
+                            .alert("Delete Everything", isPresented: $showingAlert) {
+                                Button("Cancel", role: .cancel) {
+                                    // do nothing
+                                }
+                                
+                                Button("Yes") {
+                                    removeAllTasks()
+                                }
+                            } message: {
+                                Text("Are you sure you want to delete all tasks?")
                             }
                         }
                     }

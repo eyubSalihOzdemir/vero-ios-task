@@ -75,7 +75,6 @@ enum DataError: Error {
                 completion(.failure(DataError.message(error)))
             }
         }
-        
         task.resume()
     }
     
