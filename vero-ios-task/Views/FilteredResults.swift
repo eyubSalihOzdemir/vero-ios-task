@@ -24,18 +24,18 @@ struct FilteredResults: View {
         // we're going to add filter to every field and combine them with OR logic so that the search bar filter works on every field
         
         let predicateArray = [
-            NSPredicate(format: "task CONTAINS %@", filter),
-            NSPredicate(format: "title CONTAINS %@", filter),
-            NSPredicate(format: "taskDescription CONTAINS %@", filter),
-            NSPredicate(format: "sort CONTAINS %@", filter),
-            NSPredicate(format: "wageType CONTAINS %@", filter),
-            NSPredicate(format: "businessUnitKey CONTAINS %@", filter),
-            NSPredicate(format: "businessUnit CONTAINS %@", filter),
-            NSPredicate(format: "parentTaskID CONTAINS %@", filter),
-            NSPredicate(format: "preplanningBoardQuickSelect CONTAINS %@", filter),
-            NSPredicate(format: "colorCode CONTAINS %@", filter),
-            NSPredicate(format: "workingTime CONTAINS %@", filter),
-            NSPredicate(format: "isAvailableInTimeTrackingKioskMode CONTAINS %@", filter)
+            NSPredicate(format: "task CONTAINS[c] %@", filter),
+            NSPredicate(format: "title CONTAINS[c] %@", filter),
+            NSPredicate(format: "taskDescription CONTAINS[c] %@", filter),
+            NSPredicate(format: "sort CONTAINS[c] %@", filter),
+            NSPredicate(format: "wageType CONTAINS[c] %@", filter),
+            NSPredicate(format: "businessUnitKey CONTAINS[c] %@", filter),
+            NSPredicate(format: "businessUnit CONTAINS[c] %@", filter),
+            NSPredicate(format: "parentTaskID CONTAINS[c] %@", filter),
+            NSPredicate(format: "preplanningBoardQuickSelect CONTAINS[c] %@", filter),
+            NSPredicate(format: "colorCode CONTAINS[c] %@", filter),
+            NSPredicate(format: "workingTime CONTAINS[c] %@", filter),
+            NSPredicate(format: "isAvailableInTimeTrackingKioskMode CONTAINS[c] %@", filter)
         ]
         
         if filter.isEmpty {
