@@ -13,6 +13,7 @@ struct ContentView: View {
     @StateObject var contentViewViewModel = ContentViewViewModel()
     
     @State private var searchText = ""
+    @State private var debouncedSearchText = ""
     
     //@FetchRequest(sortDescriptors: []) var tasks: FetchedResults<Task>
     
@@ -23,9 +24,15 @@ struct ContentView: View {
     var body: some View {
         ZStack {
             NavigationView {
-                FilteredResults(filter: searchText, contentViewViewModel: contentViewViewModel)
+                FilteredResults(filter: debouncedSearchText, contentViewViewModel: contentViewViewModel)
             }
             .searchable(text: $searchText, prompt: "Search for tasks")
+            .onChange(of: searchText) { oldValue, newValue in
+                let workItem = DispatchWorkItem {
+                    debouncedSearchText = searchText
+                }
+                DispatchQueue.global().asyncAfter(deadline: .now() + .milliseconds(500), execute: workItem)
+            }
             
             ZStack {
                 Color.clear

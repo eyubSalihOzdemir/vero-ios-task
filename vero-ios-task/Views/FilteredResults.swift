@@ -16,8 +16,11 @@ struct FilteredResults: View {
     @FetchRequest var tasks: FetchedResults<Task>
     
     @State private var showingAlert = false
+    @State private var timer: Timer?
     
     init(filter: String, contentViewViewModel: ContentViewViewModel) {
+        self.contentViewViewModel = contentViewViewModel
+        
         // we're going to add filter to every field and combine them with OR logic so that the search bar filter works on every field
         
         let predicateArray = [
@@ -43,8 +46,7 @@ struct FilteredResults: View {
                 predicate: NSCompoundPredicate(orPredicateWithSubpredicates: predicateArray)
             )
         }
-        
-        self.contentViewViewModel = contentViewViewModel
+
     }
     
     var body: some View {
