@@ -63,24 +63,24 @@ struct FilteredResults: View {
                                 HStack {
                                     RoundedRectangle(cornerRadius: 16, style: .continuous)
                                         .frame(width: 50, height: 50)
-                                        .foregroundStyle(Color.init(hex: task.colorCode ?? "#000000").opacity(0.2))
+                                        .foregroundStyle(Color.init(hex: task.wrappedColorCode).opacity(0.2))
                                         .overlay {
                                             RoundedRectangle(cornerRadius: 16, style: .continuous)
-                                                .stroke(Color.init(hex: task.colorCode ?? "#000000").opacity(0.5), lineWidth: 2)
+                                                .stroke(Color.init(hex: task.wrappedColorCode).opacity(0.5), lineWidth: 2)
                                         }
                                         .overlay {
                                             Image(systemName: "pin.fill")
-                                                .foregroundStyle(Color.init(hex: task.colorCode ?? "#000000"))
+                                                .foregroundStyle(Color.init(hex: task.wrappedColorCode))
                                         }
                                     
                                     VStack(alignment: .leading) {
-                                        Text(task.title ?? "No title")
+                                        Text(task.wrappedTitle)
                                             .font(.title2.weight(.semibold))
                                         
-                                        Text("Task: \(task.task ?? "No task")")
+                                        Text("Task: \(task.wrappedTask)")
                                             .font(.callout.weight(.regular))
                                         
-                                        Text(task.taskDescription ?? "No description")
+                                        Text(task.wrappedTaskDescription)
                                             .font(.callout.weight(.light))
                                             .padding(.top, 2)
                                     }
