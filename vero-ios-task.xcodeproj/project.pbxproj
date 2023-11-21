@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2516AEAD2B0BD6AF0022E689 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2516AEAC2B0BD6AF0022E689 /* Extensions.swift */; };
+		252DA3102B0CAE0900BBC462 /* PullToRefresh.swift in Sources */ = {isa = PBXBuildFile; fileRef = 252DA30F2B0CAE0900BBC462 /* PullToRefresh.swift */; };
+		252DA3132B0CB35E00BBC462 /* RefreshableScrollView in Frameworks */ = {isa = PBXBuildFile; productRef = 252DA3122B0CB35E00BBC462 /* RefreshableScrollView */; };
 		25446DE12B08E714000C1E11 /* TaskModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25446DE02B08E714000C1E11 /* TaskModel.swift */; };
 		25693C472B0986CC0090D2C7 /* TaskDataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 25693C452B0986CC0090D2C7 /* TaskDataModel.xcdatamodeld */; };
 		25B241712B0790B300FE1C7B /* vero_ios_taskApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25B241702B0790B300FE1C7B /* vero_ios_taskApp.swift */; };
@@ -20,6 +23,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		2516AEAC2B0BD6AF0022E689 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		252DA30F2B0CAE0900BBC462 /* PullToRefresh.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PullToRefresh.swift; sourceTree = "<group>"; };
 		25446DE02B08E714000C1E11 /* TaskModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskModel.swift; sourceTree = "<group>"; };
 		25693C462B0986CC0090D2C7 /* TaskDataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = TaskDataModel.xcdatamodel; sourceTree = "<group>"; };
 		25B2416D2B0790B300FE1C7B /* vero-ios-task.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "vero-ios-task.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -38,6 +43,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				252DA3132B0CB35E00BBC462 /* RefreshableScrollView in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -56,6 +62,7 @@
 			isa = PBXGroup;
 			children = (
 				25B241722B0790B300FE1C7B /* ContentView.swift */,
+				252DA30F2B0CAE0900BBC462 /* PullToRefresh.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -105,6 +112,7 @@
 				25446DE52B097F69000C1E11 /* CoreData */,
 				25B241742B0790B400FE1C7B /* Assets.xcassets */,
 				25B241762B0790B400FE1C7B /* Preview Content */,
+				2516AEAC2B0BD6AF0022E689 /* Extensions.swift */,
 			);
 			path = "vero-ios-task";
 			sourceTree = "<group>";
@@ -133,6 +141,9 @@
 			dependencies = (
 			);
 			name = "vero-ios-task";
+			packageProductDependencies = (
+				252DA3122B0CB35E00BBC462 /* RefreshableScrollView */,
+			);
 			productName = "vero-ios-task";
 			productReference = 25B2416D2B0790B300FE1C7B /* vero-ios-task.app */;
 			productType = "com.apple.product-type.application";
@@ -161,6 +172,9 @@
 				Base,
 			);
 			mainGroup = 25B241642B0790B300FE1C7B;
+			packageReferences = (
+				252DA3112B0CB35E00BBC462 /* XCRemoteSwiftPackageReference "RefreshableScrollView" */,
+			);
 			productRefGroup = 25B2416E2B0790B300FE1C7B /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -188,7 +202,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				25BFE1782B0A0E4200C004A8 /* PersistenceController.swift in Sources */,
+				2516AEAD2B0BD6AF0022E689 /* Extensions.swift in Sources */,
 				25693C472B0986CC0090D2C7 /* TaskDataModel.xcdatamodeld in Sources */,
+				252DA3102B0CAE0900BBC462 /* PullToRefresh.swift in Sources */,
 				25446DE12B08E714000C1E11 /* TaskModel.swift in Sources */,
 				25BFE1752B098D3E00C004A8 /* Task+CoreDataClass.swift in Sources */,
 				25B241732B0790B300FE1C7B /* ContentView.swift in Sources */,
@@ -400,6 +416,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		252DA3112B0CB35E00BBC462 /* XCRemoteSwiftPackageReference "RefreshableScrollView" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/elegantchaos/RefreshableScrollView.git";
+			requirement = {
+				branch = main;
+				kind = branch;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		252DA3122B0CB35E00BBC462 /* RefreshableScrollView */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 252DA3112B0CB35E00BBC462 /* XCRemoteSwiftPackageReference "RefreshableScrollView" */;
+			productName = RefreshableScrollView;
+		};
+/* End XCSwiftPackageProductDependency section */
 
 /* Begin XCVersionGroup section */
 		25693C452B0986CC0090D2C7 /* TaskDataModel.xcdatamodeld */ = {
