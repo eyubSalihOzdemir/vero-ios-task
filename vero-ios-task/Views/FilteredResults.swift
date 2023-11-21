@@ -18,10 +18,30 @@ struct FilteredResults: View {
     @State private var showingAlert = false
     
     init(filter: String, contentViewViewModel: ContentViewViewModel) {
+        // we're going to add filter to every field and combine them with OR logic so that the search bar filter works on every field
+        
+        let predicateArray = [
+            NSPredicate(format: "task CONTAINS %@", filter),
+            NSPredicate(format: "title CONTAINS %@", filter),
+            NSPredicate(format: "taskDescription CONTAINS %@", filter),
+            NSPredicate(format: "sort CONTAINS %@", filter),
+            NSPredicate(format: "wageType CONTAINS %@", filter),
+            NSPredicate(format: "businessUnitKey CONTAINS %@", filter),
+            NSPredicate(format: "businessUnit CONTAINS %@", filter),
+            NSPredicate(format: "parentTaskID CONTAINS %@", filter),
+            NSPredicate(format: "preplanningBoardQuickSelect CONTAINS %@", filter),
+            NSPredicate(format: "colorCode CONTAINS %@", filter),
+            NSPredicate(format: "workingTime CONTAINS %@", filter),
+            NSPredicate(format: "isAvailableInTimeTrackingKioskMode CONTAINS %@", filter)
+        ]
+        
         if filter.isEmpty {
             _tasks = FetchRequest<Task>(sortDescriptors: [])
         } else {
-            _tasks = FetchRequest<Task>(sortDescriptors: [], predicate: NSPredicate(format: "title BEGINSWITH %@", filter))
+            _tasks = FetchRequest<Task>(
+                sortDescriptors: [],
+                predicate: NSCompoundPredicate(orPredicateWithSubpredicates: predicateArray)
+            )
         }
         
         self.contentViewViewModel = contentViewViewModel
