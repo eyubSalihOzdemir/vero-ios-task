@@ -7,6 +7,7 @@
 
 import SwiftUI
 import CoreData
+import RefreshableScrollView
 
 struct ContentView: View {
     @Environment(\.managedObjectContext) var moc
@@ -15,7 +16,8 @@ struct ContentView: View {
     
     @FetchRequest(sortDescriptors: []) var tasks: FetchedResults<Task>
     
-    @State var showingAlert = false
+    @State private var showingAlert = false
+    @State private var searchText = ""
     
     init() {
         
@@ -28,34 +30,54 @@ struct ContentView: View {
                     if tasks.count == 0 {
                         Text("No tasks here—quiet as a library.")
                     } else {
-                        List {
+                        RefreshableScrollView {
                             ForEach(tasks) { task in
-                                HStack {
-                                    Text(task.taskDescription ?? "No description")
+                                LazyVStack(alignment: .leading) {
+                                    ZStack {
+                                        Color.white
                                     
-                                    Spacer()
-                                    
-                                    Circle()
-                                        .fill(Color.red)
-                                        .frame(width: 20, height: 20)
+                                        HStack {
+                                            RoundedRectangle(cornerRadius: 16, style: .continuous)
+                                                .frame(width: 50, height: 50)
+                                                .foregroundStyle(Color.init(hex: task.colorCode ?? "#000000").opacity(0.2))
+                                                .overlay {
+                                                    RoundedRectangle(cornerRadius: 16, style: .continuous)
+                                                        .stroke(Color.init(hex: task.colorCode ?? "#000000").opacity(0.5), lineWidth: 2)
+                                                }
+                                                .overlay {
+                                                    Image(systemName: "pin.fill")
+                                                        .foregroundStyle(Color.init(hex: task.colorCode ?? "#000000"))
+                                                }
+                                            
+                                            VStack(alignment: .leading) {
+                                                Text(task.title ?? "No title")
+                                                    .font(.title2.weight(.semibold))
+                                                
+                                                Text("Task: \(task.task ?? "No task")")
+                                                    .font(.callout.weight(.regular))
+                                                
+                                                Text(task.taskDescription ?? "No description")
+                                                    .font(.callout.weight(.light))
+                                                    .padding(.top, 2)
+                                            }
+                                            Spacer()
+                                        }
+                                        .padding(10)
+                                    }
+                                    .fixedSize(horizontal: false, vertical: true)
+                                    .cornerRadius(20)
+                                    .padding(.horizontal)
+                                    .shadow(color: Color.black.opacity(0.2), radius: 2)
                                 }
                             }
                             .onDelete(perform: removeTask)
                         }
-                        //.allowsHitTesting(!contentViewViewModel.loading)
                         .refreshable {
                             removeAllTasks()
                             contentViewViewModel.fetch()
-                            /*withAnimation {
-                                contentViewViewModel.loading = true
-                            }
-                            DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-                                withAnimation {
-                                    contentViewViewModel.loading = false
-                                }
-                            }*/
                         }
                     }
+                    
                 }
                 .navigationTitle("Tasks")
                 .toolbar {
@@ -79,7 +101,6 @@ struct ContentView: View {
                                 Button("Cancel", role: .cancel) {
                                     // do nothing
                                 }
-                                
                                 Button("Yes") {
                                     removeAllTasks()
                                 }
@@ -90,6 +111,7 @@ struct ContentView: View {
                     }
                 }
             }
+            .searchable(text: $searchText, prompt: "Search for tasks")
             
             ZStack {
                 Color.clear
