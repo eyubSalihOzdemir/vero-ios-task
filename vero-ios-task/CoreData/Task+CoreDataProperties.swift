@@ -44,17 +44,39 @@ extension Task {
         case isAvailableInTimeTrackingKioskMode = "isAvailableInTimeTrackingKioskMode"
     }
     
-    var wrappedTitle: String { title ?? "No title" }
-    var wrappedTask: String { task ?? "No task" }
-    var wrappedTaskDescription: String { taskDescription ?? "No description" }
-    var wrappedSort: String { sort ?? "No sort" }
-    var wrappedWageType: String { wageType ?? "No wage type" }
-    var wrappedBusinessUnitKey: String { businessUnitKey ?? "No business unit key" }
-    var wrappedBusinessUnit: String { businessUnit ?? "No business unit" }
-    var wrappedParentTaskID: String { parentTaskID ?? "No parent task ID" }
-    var wrappedPreplanningBoardQuickSelect: String { preplanningBoardQuickSelect ?? "No preplanning board quick select" }
-    var wrappedColorCode: String { colorCode ?? "#ffffff" }
-    var wrappedWorkingTime: String { workingTime ?? "No working time" }
+    var wrappedTitle: String {
+        return title?.isEmpty == false ? title! : "No title"
+    }
+    var wrappedTask: String {
+        return task?.isEmpty == false ? task! : "No task"
+    }
+    var wrappedTaskDescription: String {
+        return taskDescription?.isEmpty == false ? taskDescription! : "No description"
+    }
+    var wrappedSort: String {
+        return sort?.isEmpty == false ? sort! : "No sort"
+    }
+    var wrappedWageType: String {
+        return wageType?.isEmpty == false ? wageType! : "No wage type"
+    }
+    var wrappedBusinessUnitKey: String {
+        return businessUnitKey?.isEmpty == false ? businessUnitKey! : "No business unit key"
+    }
+    var wrappedBusinessUnit: String {
+        return businessUnit?.isEmpty == false ? businessUnit! : "No business unit"
+    }
+    var wrappedParentTaskID: String {
+        return parentTaskID?.isEmpty == false ? parentTaskID! : "No parent task ID"
+    }
+    var wrappedPreplanningBoardQuickSelect: String {
+        return preplanningBoardQuickSelect?.isEmpty == false ? preplanningBoardQuickSelect! : "No preplanning board quick select"
+    }
+    var wrappedColorCode: String {
+        return colorCode?.isEmpty == false ? colorCode! : "#000000"
+    }
+    var wrappedWorkingTime: String {
+        return workingTime?.isEmpty == false ? workingTime! : "No working time"
+    }
     var wrappedIsAvailableTimeTrackingKioskMode: Bool { isAvailableInTimeTrackingKioskMode }
     
 }
