@@ -39,7 +39,9 @@ struct FilteredResults: View {
         ]
         
         if filter.isEmpty {
-            _tasks = FetchRequest<Task>(sortDescriptors: [])
+            _tasks = FetchRequest<Task>(sortDescriptors: [
+                SortDescriptor(\Task.title)
+            ])
         } else {
             _tasks = FetchRequest<Task>(
                 sortDescriptors: [],
