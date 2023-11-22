@@ -141,7 +141,7 @@ struct FilteredResults: View {
                             removeAllTasks()
                         }
                     } message: {
-                        Text("Are you sure you want to delete all tasks?")
+                        Text("Are you sure you want to delete all resources?")
                     }
                 }
             }
