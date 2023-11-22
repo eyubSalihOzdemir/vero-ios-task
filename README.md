@@ -14,7 +14,7 @@ Let me give you some insight about the project before talking about the requirem
 - Request the resources located at `https://api.baubuddy.de/dev/index.php/v1/tasks/select`
   - I can successfully fetch the resources from this endpoint in the background and I publish the results in the main thread.
 - Store them in an appropriate data structure that allows using the application offline.
-  - I had basically 3 choices for this: *UserDefaults*, *files* or *Core Data*. I choose **Core Data**.
+  - I basically had 3 choices for this: *UserDefaults*, *files* or *Core Data*. I choose **Core Data**.
     - User Defaults are not ideal for large sizes of data but it’s practical for saving preferences or other types of ‘small’ data.
     - Files might be useful but it also might be hard to manage structural data like our JSON data.
     - Core Data is the ideal solution for structural data since we already have a model in hand to parse JSON. It would also be easier to add relations if we need to fetch another type of data in the future that’s related to ‘tasks’. It's also easier to save and load the data for offline use.
