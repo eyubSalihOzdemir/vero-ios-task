@@ -25,10 +25,7 @@ import CodeScanner
     
     @Published var isShowingQRScanner = false
        
-    init() {
-        // fetch the data as soon as we initialize this class
-        //self.fetch()
-    }
+    init() { }
     
     // function to get the login token
     private func getAuth(completion: @escaping (Result<String, Error>) -> Void) {
@@ -86,12 +83,7 @@ import CodeScanner
         let url = URL(string: "https://api.baubuddy.de/dev/index.php/v1/tasks/select")!
         
         var request = URLRequest(url: url)
-        //var request = NSMutableURLRequest(url: NSURL(string: "https://api.baubuddy.de/index.php/login")! as URL,
-          //                                cachePolicy: .useProtocolCachePolicy,
-           //                               timeoutInterval: 10.0)
         request.addValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
-        //request.addValue("application/json", forHTTPHeaderField: "Content-Type")
-        //request.httpMethod = "POST"
         
         let task = URLSession.shared.dataTask(with: request as URLRequest) { (data, response, error) in
             // catch if there is a problem with the data
@@ -115,6 +107,7 @@ import CodeScanner
         task.resume()
     }
     
+    // combine the auth token and requesting for the actual data with the token
     func fetch() {
         self.loading = true
         
@@ -122,7 +115,7 @@ import CodeScanner
             switch result {
             case .success(let token):
                 self.getResources(token: token) { resourceResult in
-                    // make the the publishing happens on the main thread
+                    // publish on main thread
                     DispatchQueue.main.async {
                         switch resourceResult {
                         case .success(let tasks):
@@ -141,6 +134,7 @@ import CodeScanner
         }
     }
     
+    // save the fetched data to CoreData
     func saveToCoreData(tasks: [TaskModel]) {
         for task in tasks {
             let coreDataTask = Task(context: PersistenceController.shared.container.viewContext)
@@ -162,6 +156,7 @@ import CodeScanner
         }
     }
     
+    // handle the result from QR code scan
     func handleScan(result: Result<ScanResult, ScanError>) {
         isShowingDrawer = false
         isShowingQRScanner = false

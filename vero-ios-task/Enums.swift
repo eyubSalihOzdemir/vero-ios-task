@@ -7,7 +7,7 @@
 
 import Foundation
 
-// error types to make debuggin easier for us
+// error types to make debugging easier for us
 enum DataError: Error {
     case invalidDataAuth
     case invalidResponseAuth

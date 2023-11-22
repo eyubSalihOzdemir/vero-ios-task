@@ -7,8 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		251392B22B0E333D00955CE1 /* DrawerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 251392B12B0E333D00955CE1 /* DrawerView.swift */; };
+		251392B42B0E336700955CE1 /* LoadingIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 251392B32B0E336700955CE1 /* LoadingIndicator.swift */; };
 		2516AEAD2B0BD6AF0022E689 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2516AEAC2B0BD6AF0022E689 /* Extensions.swift */; };
-		252DA3102B0CAE0900BBC462 /* PullToRefresh.swift in Sources */ = {isa = PBXBuildFile; fileRef = 252DA30F2B0CAE0900BBC462 /* PullToRefresh.swift */; };
 		252DA3132B0CB35E00BBC462 /* RefreshableScrollView in Frameworks */ = {isa = PBXBuildFile; productRef = 252DA3122B0CB35E00BBC462 /* RefreshableScrollView */; };
 		25446DE12B08E714000C1E11 /* TaskModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25446DE02B08E714000C1E11 /* TaskModel.swift */; };
 		25693C472B0986CC0090D2C7 /* TaskDataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 25693C452B0986CC0090D2C7 /* TaskDataModel.xcdatamodeld */; };
@@ -21,14 +22,15 @@
 		25BFE1752B098D3E00C004A8 /* Task+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25BFE1732B098D3E00C004A8 /* Task+CoreDataClass.swift */; };
 		25BFE1762B098D3E00C004A8 /* Task+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25BFE1742B098D3E00C004A8 /* Task+CoreDataProperties.swift */; };
 		25BFE1782B0A0E4200C004A8 /* PersistenceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25BFE1772B0A0E4200C004A8 /* PersistenceController.swift */; };
-		25C09B372B0D763F0059450C /* DrawerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25C09B362B0D763F0059450C /* DrawerView.swift */; };
+		25C09B372B0D763F0059450C /* Drawer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25C09B362B0D763F0059450C /* Drawer.swift */; };
 		25C09B392B0D82790059450C /* Enums.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25C09B382B0D82790059450C /* Enums.swift */; };
 		25C09B402B0D90EB0059450C /* CodeScanner in Frameworks */ = {isa = PBXBuildFile; productRef = 25C09B3F2B0D90EB0059450C /* CodeScanner */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		251392B12B0E333D00955CE1 /* DrawerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawerView.swift; sourceTree = "<group>"; };
+		251392B32B0E336700955CE1 /* LoadingIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingIndicator.swift; sourceTree = "<group>"; };
 		2516AEAC2B0BD6AF0022E689 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
-		252DA30F2B0CAE0900BBC462 /* PullToRefresh.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PullToRefresh.swift; sourceTree = "<group>"; };
 		25446DE02B08E714000C1E11 /* TaskModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskModel.swift; sourceTree = "<group>"; };
 		25693C462B0986CC0090D2C7 /* TaskDataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = TaskDataModel.xcdatamodel; sourceTree = "<group>"; };
 		25B2416D2B0790B300FE1C7B /* vero-ios-task.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "vero-ios-task.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -41,7 +43,7 @@
 		25BFE1732B098D3E00C004A8 /* Task+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Task+CoreDataClass.swift"; sourceTree = "<group>"; };
 		25BFE1742B098D3E00C004A8 /* Task+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Task+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		25BFE1772B0A0E4200C004A8 /* PersistenceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistenceController.swift; sourceTree = "<group>"; };
-		25C09B362B0D763F0059450C /* DrawerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawerView.swift; sourceTree = "<group>"; };
+		25C09B362B0D763F0059450C /* Drawer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Drawer.swift; sourceTree = "<group>"; };
 		25C09B382B0D82790059450C /* Enums.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Enums.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -58,6 +60,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		251392B02B0E327A00955CE1 /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				25C09B362B0D763F0059450C /* Drawer.swift */,
+				251392B32B0E336700955CE1 /* LoadingIndicator.swift */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
 		25446DDD2B08E6E8000C1E11 /* Models */ = {
 			isa = PBXGroup;
 			children = (
@@ -69,10 +80,10 @@
 		25446DDE2B08E6F1000C1E11 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				251392B02B0E327A00955CE1 /* Components */,
 				25B241722B0790B300FE1C7B /* ContentView.swift */,
-				252DA30F2B0CAE0900BBC462 /* PullToRefresh.swift */,
+				251392B12B0E333D00955CE1 /* DrawerView.swift */,
 				25B322D92B0CE9B3008298CA /* FilteredResults.swift */,
-				25C09B362B0D763F0059450C /* DrawerView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -217,14 +228,15 @@
 				25BFE1782B0A0E4200C004A8 /* PersistenceController.swift in Sources */,
 				2516AEAD2B0BD6AF0022E689 /* Extensions.swift in Sources */,
 				25693C472B0986CC0090D2C7 /* TaskDataModel.xcdatamodeld in Sources */,
-				252DA3102B0CAE0900BBC462 /* PullToRefresh.swift in Sources */,
-				25C09B372B0D763F0059450C /* DrawerView.swift in Sources */,
+				25C09B372B0D763F0059450C /* Drawer.swift in Sources */,
 				25446DE12B08E714000C1E11 /* TaskModel.swift in Sources */,
 				25BFE1752B098D3E00C004A8 /* Task+CoreDataClass.swift in Sources */,
+				251392B22B0E333D00955CE1 /* DrawerView.swift in Sources */,
 				25C09B392B0D82790059450C /* Enums.swift in Sources */,
 				25B241732B0790B300FE1C7B /* ContentView.swift in Sources */,
 				25B322DA2B0CE9B3008298CA /* FilteredResults.swift in Sources */,
 				25B241712B0790B300FE1C7B /* vero_ios_taskApp.swift in Sources */,
+				251392B42B0E336700955CE1 /* LoadingIndicator.swift in Sources */,
 				25BFE1762B098D3E00C004A8 /* Task+CoreDataProperties.swift in Sources */,
 				25B2417F2B0796EF00FE1C7B /* ContentViewViewModel.swift in Sources */,
 			);

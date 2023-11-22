@@ -44,6 +44,7 @@ extension Task {
         case isAvailableInTimeTrackingKioskMode = "isAvailableInTimeTrackingKioskMode"
     }
     
+    // we're going to use wrapped values and handle the optional here in one place
     var wrappedTitle: String {
         return title?.isEmpty == false ? title! : "No title"
     }

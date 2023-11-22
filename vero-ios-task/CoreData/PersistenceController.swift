@@ -30,6 +30,7 @@ struct PersistenceController {
         }
     }
     
+    // actual save function for the Core Data
     func save() {
         let context = container.viewContext
 
@@ -43,18 +44,4 @@ struct PersistenceController {
             }
         }
     }
-    
-    /*func deleteAll() {
-        let context = container.viewContext
-        
-        let fetchRequest: NSFetchRequest<NSFetchRequestResult> = NSFetchRequest(entityName: "Task")
-        let deleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)
-
-        do {
-            try context.execute(deleteRequest)
-            try context.save()
-        } catch let error as NSError {
-            print("Error clearing CoreData: \(error)")
-        }
-    }*/
 }

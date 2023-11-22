@@ -6,41 +6,66 @@
 //
 
 import SwiftUI
+import CodeScanner
 
-struct Drawer<Menu: View, Content: View>: View {
-  @Binding private var isOpened: Bool
-  private let menu: Menu
-  private let content: Content
-
-  // MARK: - Init
-  public init(
-    isOpened: Binding<Bool>,
-    @ViewBuilder menu:  () -> Menu,
-    @ViewBuilder content: () -> Content
-  ) {
-    _isOpened = isOpened
-    self.menu = menu()
-    self.content = content()
-  }
-
-  // MARK: - Body
-  public var body: some View {
-    ZStack(alignment: .trailing) {
-      content
-
-      if isOpened {
-        Color.clear.contentShape(Rectangle())
-              .onTapGesture {
-                  if isOpened {
-                      isOpened.toggle()
-                  }
-              }
-          
-        menu
-              .transition(.move(edge: .trailing))
-              .zIndex(1)
-      }
+// MARK: - Drawer View
+struct DrawerView: View {
+    @ObservedObject var contentViewViewModel: ContentViewViewModel
+    
+    // you can change this to simulate the result of the QR code scanner
+    @State private var qrCodeSimulatedResult = "lagerar"
+    
+    init(contentViewViewModel: ContentViewViewModel) {
+        self.contentViewViewModel = contentViewViewModel
     }
-    .animation(.spring(), value: isOpened)
-  }
+    
+    var body: some View {
+        Drawer(isOpened: $contentViewViewModel.isShowingDrawer) {
+            // content of the drawer
+            ZStack {
+                Color.white
+                
+                NavigationView {
+                    VStack {
+                        HStack {
+                            Text("Sort type")
+                            Spacer()
+                            Picker("Sort type", selection: $contentViewViewModel.selectedSortType) {
+                                ForEach(SortType.allCases) { sortType in
+                                    Text(String(describing: sortType.rawValue))
+                                }
+                            }
+                            .pickerStyle(.menu)
+                        }
+                        
+                        HStack {
+                            Text("Scan QR code")
+                            Spacer()
+                            Button {
+                                contentViewViewModel.isShowingQRScanner.toggle()
+                            } label: {
+                                Image(systemName: "qrcode.viewfinder")
+                            }
+                            .padding(.trailing, 10)
+                        }
+                        
+                        Spacer()
+                    }
+                    .padding(.top, 20)
+                    .padding(.horizontal)
+                    .navigationTitle("Settings")
+                }
+                .sheet(isPresented: $contentViewViewModel.isShowingQRScanner) {
+                    CodeScannerView(codeTypes: [.qr], simulatedData: qrCodeSimulatedResult, completion: contentViewViewModel.handleScan)
+                }
+            }
+            .frame(width: 250)
+            .background(Rectangle()
+                .shadow(radius: 8))
+            
+        } content: {
+            // content of what's behind the drawer
+            ListingView(contentViewViewModel: contentViewViewModel)
+        }
+    }
 }
