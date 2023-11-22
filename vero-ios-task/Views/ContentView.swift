@@ -12,8 +12,6 @@ import RefreshableScrollView
 struct ContentView: View {
     @StateObject var contentViewViewModel = ContentViewViewModel()
     
-    @State private var darkMode = true
-    
     var body: some View {
         ZStack {
             Drawer(isOpened: $contentViewViewModel.isShowingDrawer) {

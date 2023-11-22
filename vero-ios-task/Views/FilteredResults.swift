@@ -15,9 +15,6 @@ struct FilteredResults: View {
     
     @FetchRequest var tasks: FetchedResults<Task>
     
-    @State private var showingAlert = false
-    @State private var timer: Timer?
-    
     init(filter: String, contentViewViewModel: ContentViewViewModel) {
         self.contentViewViewModel = contentViewViewModel
         
@@ -73,7 +70,7 @@ struct FilteredResults: View {
                     ForEach(tasks) { task in
                         LazyVStack(alignment: .leading) {
                             ZStack {
-                                Color.white
+                                Color.primary.colorInvert()
                             
                                 HStack {
                                     RoundedRectangle(cornerRadius: 16, style: .continuous)
@@ -132,11 +129,11 @@ struct FilteredResults: View {
             if tasks.count > 0 {
                 ToolbarItem(placement: .topBarTrailing) {
                     Button {
-                        showingAlert.toggle()
+                        contentViewViewModel.showingAlert.toggle()
                     } label: {
                         Text("Clear")
                     }
-                    .alert("Delete Everything", isPresented: $showingAlert) {
+                    .alert("Delete Everything", isPresented: $contentViewViewModel.showingAlert) {
                         Button("Cancel", role: .cancel) {
                             // do nothing
                         }

@@ -18,7 +18,11 @@ import CoreData
     @Published var searchText = ""
     @Published var debouncedSearchText = ""
     
+    @Published var showingAlert = false
+    
     @Published var selectedSortType: SortType = .title
+    
+    @Published var isShowingQRScanner = false
        
     init() {
         // fetch the data as soon as we initialize this class

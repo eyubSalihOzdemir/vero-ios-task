@@ -23,6 +23,7 @@
 		25BFE1782B0A0E4200C004A8 /* PersistenceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25BFE1772B0A0E4200C004A8 /* PersistenceController.swift */; };
 		25C09B372B0D763F0059450C /* DrawerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25C09B362B0D763F0059450C /* DrawerView.swift */; };
 		25C09B392B0D82790059450C /* Enums.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25C09B382B0D82790059450C /* Enums.swift */; };
+		25C09B402B0D90EB0059450C /* CodeScanner in Frameworks */ = {isa = PBXBuildFile; productRef = 25C09B3F2B0D90EB0059450C /* CodeScanner */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -49,6 +50,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				25C09B402B0D90EB0059450C /* CodeScanner in Frameworks */,
 				252DA3132B0CB35E00BBC462 /* RefreshableScrollView in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -152,6 +154,7 @@
 			name = "vero-ios-task";
 			packageProductDependencies = (
 				252DA3122B0CB35E00BBC462 /* RefreshableScrollView */,
+				25C09B3F2B0D90EB0059450C /* CodeScanner */,
 			);
 			productName = "vero-ios-task";
 			productReference = 25B2416D2B0790B300FE1C7B /* vero-ios-task.app */;
@@ -183,6 +186,7 @@
 			mainGroup = 25B241642B0790B300FE1C7B;
 			packageReferences = (
 				252DA3112B0CB35E00BBC462 /* XCRemoteSwiftPackageReference "RefreshableScrollView" */,
+				25C09B3E2B0D90EB0059450C /* XCRemoteSwiftPackageReference "CodeScanner" */,
 			);
 			productRefGroup = 25B2416E2B0790B300FE1C7B /* Products */;
 			projectDirPath = "";
@@ -438,6 +442,14 @@
 				kind = branch;
 			};
 		};
+		25C09B3E2B0D90EB0059450C /* XCRemoteSwiftPackageReference "CodeScanner" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/twostraws/CodeScanner";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.3.3;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -445,6 +457,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 252DA3112B0CB35E00BBC462 /* XCRemoteSwiftPackageReference "RefreshableScrollView" */;
 			productName = RefreshableScrollView;
+		};
+		25C09B3F2B0D90EB0059450C /* CodeScanner */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 25C09B3E2B0D90EB0059450C /* XCRemoteSwiftPackageReference "CodeScanner" */;
+			productName = CodeScanner;
 		};
 /* End XCSwiftPackageProductDependency section */
 
