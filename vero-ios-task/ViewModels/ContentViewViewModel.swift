@@ -7,6 +7,7 @@
 
 import Foundation
 import CoreData
+import CodeScanner
 
 @MainActor class ContentViewViewModel: ObservableObject {
     @Published var tasks: [TaskModel] = []
@@ -158,6 +159,21 @@ import CoreData
             coreDataTask.isAvailableInTimeTrackingKioskMode = task.isAvailableInTimeTrackingKioskMode ?? false
             
             PersistenceController.shared.save()
+        }
+    }
+    
+    func handleScan(result: Result<ScanResult, ScanError>) {
+        isShowingDrawer = false
+        isShowingQRScanner = false
+       
+        switch result {
+        case .success(let result):
+            DispatchQueue.main.async {
+                self.searchText = result.string
+            }
+            
+        case .failure(let error):
+            print("Scanning failed: \(error.localizedDescription)")
         }
     }
 }

@@ -8,6 +8,7 @@
 import SwiftUI
 import CoreData
 import RefreshableScrollView
+import CodeScanner
 
 struct ContentView: View {
     @StateObject var contentViewViewModel = ContentViewViewModel()
@@ -22,9 +23,7 @@ struct ContentView: View {
                         VStack {
                             HStack {
                                 Text("Sort type")
-                                
                                 Spacer()
-                                
                                 Picker("Sort type", selection: $contentViewViewModel.selectedSortType) {
                                     ForEach(SortType.allCases) { sortType in
                                         Text(String(describing: sortType.rawValue))
@@ -33,25 +32,46 @@ struct ContentView: View {
                                 .pickerStyle(.menu)
                             }
                             
+                            HStack {
+                                Text("Scan QR code")
+                                Spacer()
+                                Button {
+                                    contentViewViewModel.isShowingQRScanner.toggle()
+                                } label: {
+                                    Image(systemName: "qrcode.viewfinder")
+                                }
+                                .padding(.trailing, 10)
+                            }
+                            
                             Spacer()
                         }
                         .padding(.top, 20)
                         .padding(.horizontal)
                         .navigationTitle("Settings")
                     }
+                    .sheet(isPresented: $contentViewViewModel.isShowingQRScanner) {
+                        CodeScannerView(codeTypes: [.qr], simulatedData: "lagerar", completion: contentViewViewModel.handleScan)
+                    }
                 }
                 .frame(width: 250)
-                .shadow(radius: 8)
+                .background(Rectangle()
+                  .shadow(radius: 8))
+                
             } content: {
                 NavigationView {
                     FilteredResults(filter: contentViewViewModel.debouncedSearchText, contentViewViewModel: contentViewViewModel)
                 }
                 .searchable(text: $contentViewViewModel.searchText, prompt: "Search for tasks")
                 .onChange(of: contentViewViewModel.searchText) { oldValue, newValue in
-                    let workItem = DispatchWorkItem {
-                        contentViewViewModel.debouncedSearchText = contentViewViewModel.searchText
+                    if !newValue.isEmpty {
+                        let workItem = DispatchWorkItem {
+                            contentViewViewModel.debouncedSearchText = contentViewViewModel.searchText
+                        }
+                        DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(500), execute: workItem)
+                    } else {
+                        contentViewViewModel.debouncedSearchText = ""
                     }
-                    DispatchQueue.global().asyncAfter(deadline: .now() + .milliseconds(500), execute: workItem)
+                    
                 }
                 .navigationTitle("Tasks")
             }
