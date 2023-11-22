@@ -23,17 +23,37 @@ struct ContentView: View {
     
     var body: some View {
         ZStack {
-            NavigationView {
-                FilteredResults(filter: debouncedSearchText, contentViewViewModel: contentViewViewModel)
-            }
-            .searchable(text: $searchText, prompt: "Search for tasks")
-            .onChange(of: searchText) { oldValue, newValue in
-                let workItem = DispatchWorkItem {
-                    debouncedSearchText = searchText
+            Drawer(isOpened: $contentViewViewModel.isShowingDrawer) {
+                ZStack {
+                    Color.white
+                    
+                    NavigationView {
+                        VStack {
+                            Text("test")
+                            
+                            Spacer()
+                        }
+                        .padding(.top, 20)
+                        .navigationTitle("Settings")
+                    }
                 }
-                DispatchQueue.global().asyncAfter(deadline: .now() + .milliseconds(500), execute: workItem)
+                .frame(width: 250)
+                .shadow(radius: 8)
+            } content: {
+                NavigationView {
+                    FilteredResults(filter: debouncedSearchText, contentViewViewModel: contentViewViewModel)
+                }
+                .searchable(text: $searchText, prompt: "Search for tasks")
+                .onChange(of: searchText) { oldValue, newValue in
+                    let workItem = DispatchWorkItem {
+                        debouncedSearchText = searchText
+                    }
+                    DispatchQueue.global().asyncAfter(deadline: .now() + .milliseconds(500), execute: workItem)
+                }
+                .navigationTitle("Tasks")
             }
-            
+
+            // loading indicator
             ZStack {
                 Color.clear
                     .background(.black)

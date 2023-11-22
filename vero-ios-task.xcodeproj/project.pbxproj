@@ -21,6 +21,7 @@
 		25BFE1752B098D3E00C004A8 /* Task+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25BFE1732B098D3E00C004A8 /* Task+CoreDataClass.swift */; };
 		25BFE1762B098D3E00C004A8 /* Task+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25BFE1742B098D3E00C004A8 /* Task+CoreDataProperties.swift */; };
 		25BFE1782B0A0E4200C004A8 /* PersistenceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25BFE1772B0A0E4200C004A8 /* PersistenceController.swift */; };
+		25C09B372B0D763F0059450C /* DrawerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25C09B362B0D763F0059450C /* DrawerView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -38,6 +39,7 @@
 		25BFE1732B098D3E00C004A8 /* Task+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Task+CoreDataClass.swift"; sourceTree = "<group>"; };
 		25BFE1742B098D3E00C004A8 /* Task+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Task+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		25BFE1772B0A0E4200C004A8 /* PersistenceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistenceController.swift; sourceTree = "<group>"; };
+		25C09B362B0D763F0059450C /* DrawerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawerView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -66,6 +68,7 @@
 				25B241722B0790B300FE1C7B /* ContentView.swift */,
 				252DA30F2B0CAE0900BBC462 /* PullToRefresh.swift */,
 				25B322D92B0CE9B3008298CA /* FilteredResults.swift */,
+				25C09B362B0D763F0059450C /* DrawerView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -208,6 +211,7 @@
 				2516AEAD2B0BD6AF0022E689 /* Extensions.swift in Sources */,
 				25693C472B0986CC0090D2C7 /* TaskDataModel.xcdatamodeld in Sources */,
 				252DA3102B0CAE0900BBC462 /* PullToRefresh.swift in Sources */,
+				25C09B372B0D763F0059450C /* DrawerView.swift in Sources */,
 				25446DE12B08E714000C1E11 /* TaskModel.swift in Sources */,
 				25BFE1752B098D3E00C004A8 /* Task+CoreDataClass.swift in Sources */,
 				25B241732B0790B300FE1C7B /* ContentView.swift in Sources */,

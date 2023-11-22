@@ -22,6 +22,7 @@ enum DataError: Error {
 @MainActor class ContentViewViewModel: ObservableObject {
     @Published var tasks: [TaskModel] = []
     @Published var loading = false
+    @Published var isShowingDrawer: Bool = false
        
     init() {
         // fetch the data as soon as we initialize this class

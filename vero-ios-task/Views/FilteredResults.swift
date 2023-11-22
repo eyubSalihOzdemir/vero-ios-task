@@ -135,6 +135,16 @@ struct FilteredResults: View {
                     }
                 }
             }
+            
+            
+                ToolbarItem(placement: .topBarTrailing) {
+                    Button {
+                        contentViewViewModel.isShowingDrawer.toggle()
+                    } label: {
+                        Image(systemName: "line.horizontal.3")
+                    }
+                    .buttonStyle(.plain)
+                }
         }
     }
     
