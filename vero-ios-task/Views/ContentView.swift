@@ -9,11 +9,10 @@ import SwiftUI
 import CoreData
 import RefreshableScrollView
 
-struct ContentView: View {    
+struct ContentView: View {
     @StateObject var contentViewViewModel = ContentViewViewModel()
     
-    @State private var searchText = ""
-    @State private var debouncedSearchText = ""
+    @State private var darkMode = true
     
     var body: some View {
         ZStack {
@@ -23,16 +22,23 @@ struct ContentView: View {
                     
                     NavigationView {
                         VStack {
-                            Text("test")
-                            Picker("Auto-Join Hotspot", selection: $contentViewViewModel.selectedSortType) {
-                                ForEach(SortType.allCases, id: \.self) { sortType in
-                                    Text(String(describing: sortType.rawValue))
+                            HStack {
+                                Text("Sort type")
+                                
+                                Spacer()
+                                
+                                Picker("Sort type", selection: $contentViewViewModel.selectedSortType) {
+                                    ForEach(SortType.allCases) { sortType in
+                                        Text(String(describing: sortType.rawValue))
+                                    }
                                 }
+                                .pickerStyle(.menu)
                             }
                             
                             Spacer()
                         }
                         .padding(.top, 20)
+                        .padding(.horizontal)
                         .navigationTitle("Settings")
                     }
                 }
@@ -40,12 +46,12 @@ struct ContentView: View {
                 .shadow(radius: 8)
             } content: {
                 NavigationView {
-                    FilteredResults(filter: debouncedSearchText, contentViewViewModel: contentViewViewModel)
+                    FilteredResults(filter: contentViewViewModel.debouncedSearchText, contentViewViewModel: contentViewViewModel)
                 }
-                .searchable(text: $searchText, prompt: "Search for tasks")
-                .onChange(of: searchText) { oldValue, newValue in
+                .searchable(text: $contentViewViewModel.searchText, prompt: "Search for tasks")
+                .onChange(of: contentViewViewModel.searchText) { oldValue, newValue in
                     let workItem = DispatchWorkItem {
-                        debouncedSearchText = searchText
+                        contentViewViewModel.debouncedSearchText = contentViewViewModel.searchText
                     }
                     DispatchQueue.global().asyncAfter(deadline: .now() + .milliseconds(500), execute: workItem)
                 }

@@ -18,11 +18,6 @@ struct FilteredResults: View {
     @State private var showingAlert = false
     @State private var timer: Timer?
     
-    var testDict = [
-        "ask": \Task.task,
-        "title": \Task.title
-    ]
-    
     init(filter: String, contentViewViewModel: ContentViewViewModel) {
         self.contentViewViewModel = contentViewViewModel
         
@@ -44,9 +39,20 @@ struct FilteredResults: View {
         ]
         
         if filter.isEmpty {
-            _tasks = FetchRequest<Task>(sortDescriptors: [
-                SortDescriptor(\Task.title)
-            ])
+            switch contentViewViewModel.selectedSortType {
+            case .title:
+                _tasks = FetchRequest<Task>(sortDescriptors: [
+                    SortDescriptor(\Task.title)
+                ])
+            case .task:
+                _tasks = FetchRequest<Task>(sortDescriptors: [
+                    SortDescriptor(\Task.task)
+                ])
+            case .description:
+                _tasks = FetchRequest<Task>(sortDescriptors: [
+                    SortDescriptor(\Task.taskDescription)
+                ])
+            }
         } else {
             _tasks = FetchRequest<Task>(
                 sortDescriptors: [

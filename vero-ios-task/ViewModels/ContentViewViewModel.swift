@@ -10,8 +10,14 @@ import CoreData
 
 @MainActor class ContentViewViewModel: ObservableObject {
     @Published var tasks: [TaskModel] = []
+    
     @Published var loading = false
+    
     @Published var isShowingDrawer: Bool = false
+    
+    @Published var searchText = ""
+    @Published var debouncedSearchText = ""
+    
     @Published var selectedSortType: SortType = .title
        
     init() {
