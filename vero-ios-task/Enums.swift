@@ -18,7 +18,8 @@ enum DataError: Error {
     case message(_ error: Error?)
 }
 
-enum SortType: String, CaseIterable {
+enum SortType: String, CaseIterable, Identifiable {
+    var id: Self { self }
     case title = "Title"
     case task = "Task"
     case description = "Description"
