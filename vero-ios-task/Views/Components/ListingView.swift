@@ -30,6 +30,5 @@ struct ListingView: View {
             }
             
         }
-        .navigationTitle("Resources")
     }
 }

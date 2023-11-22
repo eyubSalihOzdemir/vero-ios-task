@@ -115,7 +115,7 @@ struct FilteredResults: View {
             }
             
         }
-        .navigationTitle("Tasks")
+        .navigationTitle("Resources")
         .toolbar {
             ToolbarItem(placement: .topBarLeading) {
                 Button {
