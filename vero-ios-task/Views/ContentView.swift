@@ -15,12 +15,6 @@ struct ContentView: View {
     @State private var searchText = ""
     @State private var debouncedSearchText = ""
     
-    //@FetchRequest(sortDescriptors: []) var tasks: FetchedResults<Task>
-    
-    init() {
-        
-    }
-    
     var body: some View {
         ZStack {
             Drawer(isOpened: $contentViewViewModel.isShowingDrawer) {
@@ -30,6 +24,11 @@ struct ContentView: View {
                     NavigationView {
                         VStack {
                             Text("test")
+                            Picker("Auto-Join Hotspot", selection: $contentViewViewModel.selectedSortType) {
+                                ForEach(SortType.allCases, id: \.self) { sortType in
+                                    Text(String(describing: sortType.rawValue))
+                                }
+                            }
                             
                             Spacer()
                         }

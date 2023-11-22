@@ -22,6 +22,7 @@
 		25BFE1762B098D3E00C004A8 /* Task+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25BFE1742B098D3E00C004A8 /* Task+CoreDataProperties.swift */; };
 		25BFE1782B0A0E4200C004A8 /* PersistenceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25BFE1772B0A0E4200C004A8 /* PersistenceController.swift */; };
 		25C09B372B0D763F0059450C /* DrawerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25C09B362B0D763F0059450C /* DrawerView.swift */; };
+		25C09B392B0D82790059450C /* Enums.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25C09B382B0D82790059450C /* Enums.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -40,6 +41,7 @@
 		25BFE1742B098D3E00C004A8 /* Task+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Task+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		25BFE1772B0A0E4200C004A8 /* PersistenceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistenceController.swift; sourceTree = "<group>"; };
 		25C09B362B0D763F0059450C /* DrawerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawerView.swift; sourceTree = "<group>"; };
+		25C09B382B0D82790059450C /* Enums.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Enums.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -119,6 +121,7 @@
 				25B241742B0790B400FE1C7B /* Assets.xcassets */,
 				25B241762B0790B400FE1C7B /* Preview Content */,
 				2516AEAC2B0BD6AF0022E689 /* Extensions.swift */,
+				25C09B382B0D82790059450C /* Enums.swift */,
 			);
 			path = "vero-ios-task";
 			sourceTree = "<group>";
@@ -214,6 +217,7 @@
 				25C09B372B0D763F0059450C /* DrawerView.swift in Sources */,
 				25446DE12B08E714000C1E11 /* TaskModel.swift in Sources */,
 				25BFE1752B098D3E00C004A8 /* Task+CoreDataClass.swift in Sources */,
+				25C09B392B0D82790059450C /* Enums.swift in Sources */,
 				25B241732B0790B300FE1C7B /* ContentView.swift in Sources */,
 				25B322DA2B0CE9B3008298CA /* FilteredResults.swift in Sources */,
 				25B241712B0790B300FE1C7B /* vero_ios_taskApp.swift in Sources */,

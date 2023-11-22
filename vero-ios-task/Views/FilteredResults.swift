@@ -18,6 +18,11 @@ struct FilteredResults: View {
     @State private var showingAlert = false
     @State private var timer: Timer?
     
+    var testDict = [
+        "ask": \Task.task,
+        "title": \Task.title
+    ]
+    
     init(filter: String, contentViewViewModel: ContentViewViewModel) {
         self.contentViewViewModel = contentViewViewModel
         
@@ -44,7 +49,9 @@ struct FilteredResults: View {
             ])
         } else {
             _tasks = FetchRequest<Task>(
-                sortDescriptors: [],
+                sortDescriptors: [
+                    SortDescriptor(\Task.title)
+                ],
                 predicate: NSCompoundPredicate(orPredicateWithSubpredicates: predicateArray)
             )
         }

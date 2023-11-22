@@ -8,21 +8,11 @@
 import Foundation
 import CoreData
 
-// error types to make debuggin easier for us
-enum DataError: Error {
-    case invalidDataAuth
-    case invalidResponseAuth
-    case typeConversionAuth
-    case invalidData
-    case invalidResponse
-    case typeConversion
-    case message(_ error: Error?)
-}
-
 @MainActor class ContentViewViewModel: ObservableObject {
     @Published var tasks: [TaskModel] = []
     @Published var loading = false
     @Published var isShowingDrawer: Bool = false
+    @Published var selectedSortType: SortType = .title
        
     init() {
         // fetch the data as soon as we initialize this class
